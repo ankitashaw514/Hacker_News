@@ -2,10 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+  
+
+  
+  
   return (
     <React.Fragment>
       <h1>Hacker News Clone</h1>
-      <div className="nav-link">
+      <div>
         <NavLink to="/newStories" activeClassName="active">
           New Stories
         </NavLink>
@@ -30,6 +34,9 @@ const Header = () => {
         <NavLink to="/" activeClassName="active">
           Login
         </NavLink>
+        <NavLink to="/search" activeClassName="active">
+          Search
+        </NavLink>
         
         
         
@@ -39,3 +46,4 @@ const Header = () => {
 };
 
 export default Header;
+

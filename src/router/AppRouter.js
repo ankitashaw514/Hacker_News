@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
-import Header from '../components/Header';
-import Home from '../components/Home'
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import ShowStories from '../components/ShowNewStories';
-import { useEffect } from 'react';
+import { Redirect } from 'react-router';
+import ShowStories from '../components/ShowLatestStories';
+import Search from '../components/Search';
+
 
 const AppRouter = () => {
   
@@ -14,11 +14,10 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <div className="container">
-        <Header />
         <Switch>
-        <Route path="/" component={Home} exact={true}/>
+        <Route path="/" render={() => <Redirect to="/newStories" />} exact={true}/>
         <Route path="/newStories" component={ShowStories} />
-          
+        <Route path="/search" component={Search} /> 
         </Switch>
       </div>
     </BrowserRouter>
