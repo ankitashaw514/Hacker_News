@@ -38,7 +38,7 @@ export const convertDateToTimeAgo = (date) => {
  if (minutes) return `${minutes} minutes ago`;
   delta -= minutes * 60;
   // what's left is seconds
-  var seconds = delta % 60;
+  var seconds = Math.floor(delta % 60);
  return `${seconds} seconds ago`;
 
 }
