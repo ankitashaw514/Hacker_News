@@ -14,11 +14,14 @@ body {
 
 ul{
   position:relative;
-  overflow: hidden;
+  overflow: scroll;
   display: block;
   margin-left: 8vw;
   margin-right: 8vw;
   width: 84vw;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
 
 }
 li{
@@ -32,11 +35,11 @@ li{
 /* navbar */
 
 .navbar ul{
-  height: 7vh;
-  padding: 12px;
+  padding: 10px;
   border-bottom: solid;
   border-color:#ff6600 ;
   margin-bottom: 5vh;
+  
   
 }
 .navbar ul li{
@@ -60,7 +63,6 @@ li{
   
   float: centre;
   margin-top: 2vh;
-  height: 10vh;
   padding: 5px;
   align-items: center; 
   justify-content: center;
@@ -82,17 +84,10 @@ li{
   color: black;
 }
 
-.right{
-  float: right;
-  
-}
-.left{
-  float: left;
-    
-}
+
 
 .down{
-  clear: both;
+ 
   font-weight: bold;
   
 }
@@ -103,14 +98,18 @@ li{
 .filter{
   position: relative;
   width: 84vw;
-  height: 12vh;
+  height: auto;
   margin-left: 8vw;
-  margin-right: 8vw;  
+  margin-right: 8vw; 
+  display: flex; 
+  justify-content: space-between;
+  padding-bottom: 25px;
   
 }
 
 .filter select{
-  padding: 3px;
+  padding-left: 3px;
+  font-size:medium;
   margin-left: 10px;
 }
 
@@ -152,8 +151,10 @@ li{
   padding: 10px;
 
 }
-.story_item{
+.story-item{
   position:relative;
+  display: flex;
+  justify-content: space-between;
   
   
 }
@@ -185,18 +186,18 @@ a:hover,a:active {
 
 #searchBar{
   font-size: medium;
-  padding: 2px;
+  padding: 1px;
   
 }
 .search{
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
   display: block;
   float: centre;
   margin-left: 8vw;
   margin-right: 8vw;
   width: 84vw;
-  height: 4vh;
+  height: auto;
   padding-bottom: 2vh;
   justify-content: center;
   display: flex;
@@ -211,9 +212,7 @@ a:hover,a:active {
 
 .calenderWrapper{
   position: relative;
-  margin: 20px;
-  
-  
+  margin-top: 10px;
   
 }
 
@@ -221,25 +220,25 @@ a:hover,a:active {
 
 .comment{
   line-height: 2;
-}
-
-
-@media screen and (max-width: 600px) {
-  .navbar a:not(:first-child) {display: none;}
-  .navbar a.icon {
-    float: right;
-    display: block;
-  }
+  overflow:scroll;
 }
 
 
 
-@media screen and (max-width: 600px) {
-  .footer a:not(:first-child) {display: none;}
-  .footer a.icon {
-    float: right;
+ @media screen and (max-width: 500px) {
+  ul{
+    position:relative;
+    overflow: scroll;
     display: block;
+    margin-left: 8vw;
+    margin-right: 8vw;
+    width: 84vw;
+    height: auto;
+  
   }
-} 
+
+}
+
+
 
 

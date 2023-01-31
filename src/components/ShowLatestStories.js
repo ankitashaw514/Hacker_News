@@ -48,8 +48,8 @@ const ShowStories = () => {
           })  
         }
       <div className="buttonBox">
-      <button className="Button" onClick={decrementPageNum}>&#8249; Privious</button>
-      <button className="Button " onClick={ increamentPageNum}>Next &#8250;</button>
+        <button className="Button" onClick={decrementPageNum}>&#8249; Privious</button>
+        <button className="Button " onClick={ increamentPageNum}>Next &#8250;</button>
       </div>
         
         </React.Fragment>  

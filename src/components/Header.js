@@ -10,10 +10,10 @@ const Header = () => {
     
     <div className="navbar">
       <ul className="navbar-links">
-        <div className="left">
+        <div>
           <li><a href="/"><h3>Hacker News</h3></a></li>
         </div>
-        <div className="right">
+        <div>
           <li><a href="/newStories">New Stories</a></li>  
           <li><a href="https://news.ycombinator.com/front">Past</a></li> 
           <li><a href="https://news.ycombinator.com/newcomments">Comments</a></li> 

@@ -55,7 +55,7 @@ export const convertDateToTimeAgo = (date) => {
         <div className="story-title"><Link url={url} title={title} />
         </div>
           <div className="story-item">
-            <div className="left">
+            <div>
                 {`${points  > 0 ? points : 0}`}{' '}
                 points {' '} | {' '}
                 <Link
@@ -64,11 +64,9 @@ export const convertDateToTimeAgo = (date) => {
                 />
       
             </div>
-            <div className="right">
+            <div>
               {convertDateToTimeAgo(created_at_i)} by {' '}
               <Link url={`https://news.ycombinator.com/user?id=${author}`} title={author} />
-            </div>
-            <div className="down">
             </div>
 
           </div>
@@ -77,18 +75,19 @@ export const convertDateToTimeAgo = (date) => {
     (
       <div className="story"> 
         <div className="story-item">
-          <div className="left">
+          <div>
               {`${points  > 0 ? points : 0}`}{' '}
               points {' '} | {' '}
               <Link url={`https://news.ycombinator.com/item?id=${parent_id}`} title={" parent"} />
             
           </div>
-          <div className="right" >
+          <div  >
             {convertDateToTimeAgo(created_at_i)} by {' '}
             <Link url={`https://news.ycombinator.com/user?id=${author}`} title={author} />
           </div>
       
-      
+        </div>
+        <div>
           <div className="down">
             <br/>
             <Link url={story_url} title={story_title}/>

@@ -9,7 +9,7 @@ const SearchFooter = () => {
         <div className="footer">
           <ul className="footer-links">
             <li><a href="https://hn.algolia.com/about">About</a></li>
-            <li><a href="/https://hn.algolia.com/settings">Setting</a></li>
+            <li><a href="https://hn.algolia.com/settings">Setting</a></li>
             <li><a href="https://hn.algolia.com/help">Help</a></li>
             <li><a href="https://hn.algolia.com/api">API Documentation</a></li>
             <li><a href="/">Hacker News</a></li>

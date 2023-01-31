@@ -6,6 +6,7 @@ import { useLocation } from "react-router";
 import "react-datepicker/dist/react-datepicker.css";  
 
 
+
 import Story from './Story';
 import {GetFilteredResults} from '../hooks/GetData';
 
@@ -65,14 +66,14 @@ const Search = () => {
       <React.Fragment>
         <Header/>
           <div className="filter">
-              <div className="left">
+              <div>
                 Search:&#160;
                 <input id="searchBar" type="text" placeholder="Search here" onChange={e => setInput(e.target.value)} value={input} onKeyDown={(e)=>{
                   if (e.key === 'Enter') {
                     setQuery(input)
                   }}}/>             
               </div>
-              <div className="right">
+              <div >
               <select value={search} onChange={e => setSearch(e.target.value)}>
                   {searchOptions.map((value) => (
                     <option value={value} key={value}>
@@ -101,7 +102,6 @@ const Search = () => {
                     <li>
                       From 
                       <DatePicker
-                      className="calendar-input"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                       dateFormat="dd/MM/yyyy "
@@ -110,7 +110,6 @@ const Search = () => {
                     <li>
                       To 
                     <DatePicker
-                    className="calendar-input"
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}
                     dateFormat="dd/MM/yyyy "
