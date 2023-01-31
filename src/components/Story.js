@@ -1,6 +1,5 @@
 import React from 'react';
-
-
+var parse = require('html-react-parser');
 
 const Link = ({ url, title }) => {
     return (
@@ -9,10 +8,6 @@ const Link = ({ url, title }) => {
       </a>
     );
 }
-
-
-
-
 
 
 export const convertDateToTimeAgo = (date) => {
@@ -50,47 +45,62 @@ export const convertDateToTimeAgo = (date) => {
 
  const Story = (props) => {
      
-    const { objectID, points,author,num_comments, title, created_at_i, url ,story_title,story_url,comment_text,parent_id} = props.story;
-    
-  console.log(objectID) 
+    const { objectID, points,author,num_comments, title, created_at_i, url ,story_title,story_url,comment_text,parent_id,_tags} = props.story;
+    const text = parse(`${comment_text}`);
+
   return (
-    <div >
-      <div >
-        {title?(<Link url={url} title={title} />):('')}
-        
-      </div>
-      <div >
-        <span>
-          {`${points  > 0 ? points : 0}`}{' '}
-          points by{' '}
-          <Link url={`https://news.ycombinator.com/user?id=${author}`} title={author} />
-        </span>
-        |<span>
-          {convertDateToTimeAgo(created_at_i)}
-        </span>|
-        <span>
-          <Link
-            url={`https://news.ycombinator.com/item?id=${objectID}`}
-            title={`${num_comments  > 0 ? num_comments : 0} comments`}
-          />
-        </span>
-        <span >
-          
-        {parent_id?(<Link url={`https://news.ycombinator.com/item?id=${parent_id}`} title={"parent"} />):('')}
-        
-      </span>
-        <span >
-          
-        {story_title?( <Link url={story_url} title={story_title} />):('')}
-        
-      </span>
+  <div>
+    {_tags[0] === "story"?(
+      <div className="story"> 
+        <div className="story-title"><Link url={url} title={title} />
+        </div>
+          <div className="story-item">
+            <div className="left">
+                {`${points  > 0 ? points : 0}`}{' '}
+                points {' '} | {' '}
+                <Link
+                  url={`https://news.ycombinator.com/item?id=${objectID}`}
+                  title={`${num_comments  > 0 ? num_comments : 0} comments `}
+                />
       
-      <div >
-        {comment_text?(<p>{comment_text}</p>):('')}
-        
+            </div>
+            <div className="right">
+              {convertDateToTimeAgo(created_at_i)} by {' '}
+              <Link url={`https://news.ycombinator.com/user?id=${author}`} title={author} />
+            </div>
+            <div className="down">
+            </div>
+
+          </div>
       </div>
+    ):
+    (
+      <div className="story"> 
+        <div className="story-item">
+          <div className="left">
+              {`${points  > 0 ? points : 0}`}{' '}
+              points {' '} | {' '}
+              <Link url={`https://news.ycombinator.com/item?id=${parent_id}`} title={" parent"} />
+            
+          </div>
+          <div className="right" >
+            {convertDateToTimeAgo(created_at_i)} by {' '}
+            <Link url={`https://news.ycombinator.com/user?id=${author}`} title={author} />
+          </div>
+      
+      
+          <div className="down">
+            <br/>
+            <Link url={story_url} title={story_title}/>
+          </div>
+          <br/>
+          <div className="comment">
+            {text}
+          </div>
+        </div>
       </div>
-    </div>
+    )} 
+  </div>
    );
  };
 

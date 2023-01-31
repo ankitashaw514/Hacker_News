@@ -1,8 +1,10 @@
 
 
 import React, { useEffect } from 'react';
+import DatePicker from "react-datepicker";  
+import { useLocation } from "react-router";
+import "react-datepicker/dist/react-datepicker.css";  
 
-import 'react-dropdown/style.css';
 
 import Story from './Story';
 import {GetFilteredResults} from '../hooks/GetData';
@@ -10,6 +12,7 @@ import {GetFilteredResults} from '../hooks/GetData';
 
 import { useState } from 'react';
 import SearchFooter from './SearchFooter';
+import Header from './Header';
 
 
 
@@ -19,7 +22,7 @@ const Search = () => {
 
 
   const searchOptions = [
-    'all', 'story', 'comment'
+    'All', 'Story', 'Comment'
   ];
   const byOptions = [
     'Popularity', 'Date'
@@ -27,29 +30,22 @@ const Search = () => {
   const timeOptions = [
     'All Time', 'Last 24h', 'Past Week','Past Month','Past Year','Custom Range'
   ];
+
+  let queryText = new URLSearchParams(useLocation().search);
+  queryText = queryText.get("q")
+
   const [pageNum, setPageNum] = useState(0);
   const [search, setSearch] = useState(searchOptions[0]);
   const [by,setBy] = useState(byOptions[0]);
-  const [query,setQuery] = useState("")
+  const [input,setInput] = useState(queryText)
+  const [query,setQuery] = useState(queryText)
   const [timeRange, setTimeRange] = useState(timeOptions[0])
-  const [startDate, setStartDate] = useState(0)
-  const [endDate, setEndDate] = useState(0)
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date())
   
-   const { isLoading, results } = GetFilteredResults(query,search,by,timeRange,pageNum,startDate,endDate);
+   const {isLoading,results}  = GetFilteredResults(query,search.toLowerCase(),by,timeRange,pageNum,startDate,endDate);
   
-  
-
  
- useEffect(() => {
-  console.log(search)
-  console.log(by)
-  console.log(timeRange)
-  console.log(query)
-  console.log(pageNum)
-  console.log(results)
-    
- },[pageNum,search,by,timeRange,results]);
-  
   const increamentPageNum =()=>{
     setPageNum(pageNum+1);
 
@@ -62,115 +58,91 @@ const Search = () => {
 
   }
 
-  const handleChangeSearch = (event) => {
-    
-    setSearch(event.target.value.toLowerCase());
-    console.log(search)
-  };
-  const handleChangeBy = (event) => {
-   
-    setBy(event.target.value);
-    console.log(by)
-  };
-  const handleChangeTimeRange = (event) => {
-    
-    setTimeRange(event.target.value);
-    console.log(timeRange)
-  };
-  const handleChangeQuery = (event) => {
-    
-    setQuery(event.target.value);
-    console.log(query)
-  };
-
+  
   
  
   return (
-    <React.Fragment>
-      <header >
-            <div >
-                <span >
-                    <a href="/">
-                        <div >Search Hacker News Clone</div>
-                    </a>
-                </span>
-                    <div >
-                        
-                        
-                        <input type="text" placeholder="Search here" onChange={e => setQuery(e.target.value)} value={query} />
-                            
-                    </div>
-                    <div >
-                        <a href="https://hn.algolia.com/settings"> 
-                        <span>Settings</span>
-                        </a>
-                        
-                    </div>
-            </div>
-        </header>
-        <React.Fragment>
+      <React.Fragment>
+        <Header/>
+          <div className="filter">
+              <div className="left">
+                Search:&#160;
+                <input id="searchBar" type="text" placeholder="Search here" onChange={e => setInput(e.target.value)} value={input} onKeyDown={(e)=>{
+                  if (e.key === 'Enter') {
+                    setQuery(input)
+                  }}}/>             
+              </div>
+              <div className="right">
+                <select value={search} onChange={e => setSearch(e.target.value)}>
+                  {searchOptions.map((value) => (
+                    <option value={value} key={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+                <select value={by} onChange={e => setBy(e.target.value)}>
+                  {byOptions.map((value) => (
+                    <option value={value} key={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+                <select value={timeRange} onChange={e => setTimeRange(e.target.value)}>
+                  {timeOptions.map((value) => (
+                    <option value={value} key={value}>
+                    {value}
+                  </option> 
+                  ))}
+                </select>  
+                <b/>
+                {timeRange === 'Custom Range'?(
         
-        <select
-        value={search} 
-        onChange={e => setSearch(e.target.value)}
-        
-        >
-        {searchOptions.map((value) => (
-          <option value={value} key={value}>
-            {value}
-          </option>
-        ))}
-      </select>
-      <select
-      value={by} 
-      onChange={e => setBy(e.target.value)}>
-        {byOptions.map((value) => (
-          <option value={value} key={value}>
-            {value}
-          </option>
-        ))}
-      </select>
-      <select
-      value={timeRange} 
-      onChange={e => {
-        if (e.target.value=="Custom Range"){
-          setTimeRange(e.target.value)
-          return (
-            <div><input type="date"  onChange={e => setStartDate(e.target.value)} value={startDate} />
-            <input type="date"  onChange={e => setEndDate(e.target.value)} value={endDate} />
+                  <div className="calenderWrapper">
+                    <li>
+                      From 
+                      <DatePicker
+                      className="calendar-input"
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      dateFormat="dd/MM/yyyy "
+                    />
+                    </li>
+                    <li>
+                      To 
+                    <DatePicker
+                    className="calendar-input"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    dateFormat="dd/MM/yyyy "
+                    />
+                    </li>
+                  </div>): null}    
+              </div>  
             </div>
-            
-          )
-         
+            {isLoading? (<p className="loading">Loading...</p>) : 
+              (
+                <React.Fragment>
+                  {results.map((result)=>{
+                    return(
+                      <div>
+                      {result?(<Story key = {result.objectID} story={result} />):
+                        (<p className="loading"></p>)
 
-        } 
-        else{
-          setTimeRange(e.target.value)
-        }
-      }}>
-        {timeOptions.map((value) => (
-           <option value={value} key={value}>
-           {value}
-         </option>
-          
-        ))}
-      </select>
-        <button onClick={increamentPageNum}>More</button>
-        <button onClick={decrementPageNum}>Less</button>
-      </React.Fragment>
-      {isLoading ? (
-        <p className="loading">Loading...</p>) : 
-        (
-          results.map((result)=>{
-            return(
-              <Story key = {result.objectID} story={result} />
-            )
-          })
-        )
-      }
+                      }
+                      </div>)})}
+                  <div className="buttonBox">
+                  <button className="Button" onClick={decrementPageNum}>&#8249; Privious</button>
+                  <button className="Button" onClick={increamentPageNum}>Next &#8250;</button>
+                  </div>
+                </React.Fragment>
         
-      <SearchFooter/>
-    </React.Fragment>
+              )
+            }
+        <SearchFooter/>
+      
+      </React.Fragment>
+      
+    
   );
 };
 

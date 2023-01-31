@@ -26,11 +26,12 @@ const GetLatestStories = (pageNum) => {
 
 
 
-// custom hook for storing the filtered results got based on query given by the user
+// custom hook for storing the filtered results got based on filters chosen by the user
 
 const GetFilteredResults = (query,search,by,timeRange,pageNum,startDate,endDate) => {
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+
   
     useEffect(() => {
       setIsLoading(true);

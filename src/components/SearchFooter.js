@@ -1,28 +1,25 @@
+import React from 'react';
 
-import { Link } from 'react-router-link'
 
 
 const SearchFooter = () => {
   return (
     
         
-        <div >
-          <span className="yclinks">
-            <a href="https://hn.algolia.com/about">About</a>
-            &nbsp;| <Link to="/https://hn.algolia.com/settings">Setting</Link>
-            &nbsp;| <a href="https://hn.algolia.com/help">Help</a>
-            &nbsp;| <a href="https://hn.algolia.com/api">API Documentation</a>
-            &nbsp;| <Link to="/">Hacker News</Link>
-            &nbsp;| <Link to="https://github.com/algolia/hn-search">Fork/Contrybute</Link>
-            &nbsp;| <Link to="https://hn.algolia.com/cool_apps">Cool Apps</Link>
-          </span>
-          <br />
-          <br />
-          
+        <div className="footer">
+          <ul className="footer-links">
+            <li><a href="https://hn.algolia.com/about">About</a></li>
+            <li><a href="/https://hn.algolia.com/settings">Setting</a></li>
+            <li><a href="https://hn.algolia.com/help">Help</a></li>
+            <li><a href="https://hn.algolia.com/api">API Documentation</a></li>
+            <li><a href="/">Hacker News</a></li>
+            <li><a href="https://github.com/algolia/hn-search">Fork/Contrybute</a></li>
+            <li><a href="https://hn.algolia.com/cool_apps">Cool Apps</a></li>
+          </ul> 
         </div>
       
   );
 }
 
 
-export default SearchFooter
+export default SearchFooter;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Story from './Story';
 import {GetLatestStories} from '../hooks/GetData';
 import Header from './Header';
@@ -15,7 +15,7 @@ const ShowStories = () => {
 
   const [pageNum, setPageNum] = useState(0);
   const { isLoading, stories } = GetLatestStories(pageNum);
-  console.log(stories)
+  
   
   
   const increamentPageNum =()=>{
@@ -34,7 +34,8 @@ const ShowStories = () => {
   
   return (
     <React.Fragment>
-      <Header />
+    <Header />
+      
       {isLoading ? (
         <p className="loading">Loading...</p>
       ) : (
@@ -46,12 +47,17 @@ const ShowStories = () => {
             )
           })  
         }
-        <button onClick={increamentPageNum}>More</button>
-        <button onClick={decrementPageNum}>Less</button>
+      <div className="buttonBox">
+      <button className="Button" onClick={decrementPageNum}>&#8249; Privious</button>
+      <button className="Button " onClick={ increamentPageNum}>Next &#8250;</button>
+      </div>
+        
         </React.Fragment>  
       )}
-      <Footer/>
-    </React.Fragment>
+      
+       <Footer/> 
+      </React.Fragment>
+    
   );
 };
 

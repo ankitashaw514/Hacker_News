@@ -1,47 +1,29 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+
+
 
 const Header = () => {
   
 
   
-  
   return (
-    <React.Fragment>
-      <h1>Hacker News Clone</h1>
-      <div>
-        <NavLink to="/newStories" activeClassName="active">
-          New Stories
-        </NavLink>
-        <NavLink to="/" activeClassName="active">
-          Past
-        </NavLink>
-        <NavLink to="/" activeClassName="active">
-          Comments
-        </NavLink>
-        <NavLink to="/" activeClassName="active">
-          Ask
-        </NavLink>
-        <NavLink to="/" activeClassName="active">
-          Show
-        </NavLink>
-        <NavLink to="/" activeClassName="active">
-          Jobs
-        </NavLink>
-        <NavLink to="/" activeClassName="active">
-          Submit
-        </NavLink>
-        <NavLink to="/" activeClassName="active">
-          Login
-        </NavLink>
-        <NavLink to="/search" activeClassName="active">
-          Search
-        </NavLink>
-        
-        
-        
-      </div>
-    </React.Fragment>
+    
+    <div className="navbar">
+      <ul className="navbar-links">
+        <div className="left">
+          <li><a href="/"><h3>Hacker News</h3></a></li>
+        </div>
+        <div className="right">
+          <li><a href="/newStories">New Stories</a></li>  
+          <li><a href="https://news.ycombinator.com/front">Past</a></li> 
+          <li><a href="https://news.ycombinator.com/newcomments">Comments</a></li> 
+          <li><a href="https://news.ycombinator.com/ask">Ask</a></li> 
+          <li><a href="https://news.ycombinator.com/show">Show</a></li> 
+          <li><a href="https://news.ycombinator.com/jobs">Jobs</a></li> 
+        </div>  
+      </ul>
+    </div>
+    
   );
 };
 

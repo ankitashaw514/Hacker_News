@@ -10,6 +10,7 @@ const getLatestStories = async (pageNum) => {
   let stories = []
   try {
       const response = await axios.get(`${TIME_BASED_STORY_SEARCH_URL}&page=${pageNum}`,{mode: "cors"});
+
       //Extracting the number of stories per page
       
       let len = response.data.hitsPerPage;
@@ -24,15 +25,26 @@ const getLatestStories = async (pageNum) => {
   }
 };
 
+/*
+
+fetching the results on the basis of tags like story and comment for the particular 
+time range provided by the user from the api page wise and storing it in an array 
+
+*/
+
+
 const getResultForSpecificTagForTimeRange = async (query,search,timeRange,pageNum,startDate,endDate,url)=>{
   const timestampToday = Math.round(new Date().getTime() / 1000)
   const timestampYesterday = timestampToday - 24 * 3600
   const timestampAWeekAgo = timestampToday - 7 * 24 * 3600
   const timestampAMonthAgo = timestampToday - 30 * 24 * 3600
   const timestampAYearAgo = timestampToday - 365 * 24 * 3600
-  const timestampStartDate = Math.round(startDate.getTime()/1000)
-  const timestampEndtDate = Math.round(endDate.getTime()/1000)
+  const timestampStartDate = Math.round(startDate.getTime() / 1000)
+  const timestampEndDate = Math.round(endDate.getTime() / 1000)
+  
   let response;
+
+  // getting the response based on the Time Range provided by the user
    
   switch (timeRange) {
     case "All Time":
@@ -50,17 +62,23 @@ const getResultForSpecificTagForTimeRange = async (query,search,timeRange,pageNu
     case "Past Year":
       response = await axios.get(`${url}${query}&tags=${search}&page=${pageNum}&numericFilters=created_at_i>${timestampAYearAgo}`,{mode: "cors"});
       break;
-    case "Custom_Range":
-      response = await axios.get(`${url}${query}&tags=${search}&page=${pageNum}&numericFilters=created_at_i>${timestampStartDate},created_at_i<${timestampEndtDate}`,{mode: "cors"});
+    case "Custom Range":
+      response = await axios.get(`${url}${query}&tags=${search}&page=${pageNum}&numericFilters=created_at_i>${timestampStartDate},created_at_i<${timestampEndDate}`,{mode: "cors"});
       break;
     default:
-      response = response = await axios.get(`${url}${query}&tags=${search}&page=${pageNum}`,{mode: "cors"});
+      response = await axios.get(`${url}${query}&tags=${search}&page=${pageNum}`,{mode: "cors"});
 
   
 }
 return response;
 
 }
+
+/*
+
+fetching the all results on the basis of All tag for the particular time range provided by the user from the api page wise and storing it in an array 
+
+*/
 
 const getResultOfAllTagsForTimeRange = async (query,timeRange,pageNum,startDate,endDate,url)=>{
 
@@ -70,8 +88,13 @@ const getResultOfAllTagsForTimeRange = async (query,timeRange,pageNum,startDate,
   const timestampAMonthAgo = timestampToday - 30 * 24 * 3600
   const timestampAYearAgo = timestampToday - 365 * 24 * 3600
   const timestampStartDate = Math.round(startDate.getTime()/1000)
-  const timestampEndtDate = Math.round(endDate.getTime()/1000)
+  const timestampEndDate = Math.round(endDate.getTime()/1000)
+  console.log(timestampToday)
+  console.log(timestampStartDate)
+  console.log(timestampEndDate)
   let response;
+
+  // getting the response based on the Time Range provided by the user
      
   switch (timeRange) {
     case "All Time":
@@ -94,10 +117,10 @@ const getResultOfAllTagsForTimeRange = async (query,timeRange,pageNum,startDate,
       response = await axios.get(`${url}${query}&page=${pageNum}&numericFilters=created_at_i>${timestampAYearAgo}`,{mode: "cors"});
       break;
     case "Custom Range":
-      response = await axios.get(`${url}${query}&page=${pageNum}&numericFilters=created_at_i>${timestampStartDate},created_at_i<${timestampEndtDate}`,{mode: "cors"});
+      response = await axios.get(`${url}${query}&page=${pageNum}&numericFilters=created_at_i>${timestampStartDate},created_at_i<${timestampEndDate}`,{mode: "cors"});
       break;
     default:
-      response = response = await axios.get(`${url}${query}&page=${pageNum}`,{mode: "cors"});
+      response  = await axios.get(`${url}${query}&page=${pageNum}`,{mode: "cors"});
   }
   
   return response;
@@ -105,7 +128,7 @@ const getResultOfAllTagsForTimeRange = async (query,timeRange,pageNum,startDate,
 
 }
 
-
+// Inserting the filtered result to an array
 const insertResult = (result,results)=>{
   
    //Extracting the number of stories per page
@@ -118,17 +141,18 @@ const insertResult = (result,results)=>{
 }
 
 
+// fetching results on the basis of filters chosen by the user
 
 const getFilteredResults = async (query,search,by,timeRange,pageNum,startDate,endDate) => {
   let results = [];
   try {
-    if(search == "all"){
-      if(by == "Popularity"){
+    if(search === "all"){
+      
+      if(by === "Popularity"){
           const result = await getResultOfAllTagsForTimeRange(query,timeRange,pageNum,startDate,endDate,QUERY_BASED_SEARCH_URL_BY_POPULARITY)
-          console.log(result)
+          
             insertResult(result,results); 
             
-            //  console.log(results);
             
          
       }
@@ -144,7 +168,7 @@ const getFilteredResults = async (query,search,by,timeRange,pageNum,startDate,en
       }
     }
     else{
-      if(by == "Popularity"){
+      if(by === "Popularity"){
         const result = await getResultForSpecificTagForTimeRange(query,search,timeRange,pageNum,startDate,endDate,QUERY_BASED_SEARCH_URL_BY_POPULARITY)
         insertResult(result,results); 
       }
@@ -157,7 +181,7 @@ const getFilteredResults = async (query,search,by,timeRange,pageNum,startDate,en
       }
 
     }
-    console.log(results)
+    
    return results;
   
 } catch (error) {
