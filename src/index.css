@@ -14,7 +14,7 @@ body {
 
 ul{
   position:relative;
-  overflow: scroll;
+  overflow: hidden;
   display: block;
   margin-left: 8vw;
   margin-right: 8vw;
@@ -43,8 +43,8 @@ li{
   
 }
 .navbar ul li{
-  padding-left: 1vw; 
-  padding-top: 1vh; 
+  padding-left: 2vw; 
+  padding-top: 2vh; 
 }
 
 .navbar a{
@@ -111,6 +111,7 @@ li{
   padding-left: 3px;
   font-size:medium;
   margin-left: 10px;
+  
 }
 
 
@@ -124,19 +125,22 @@ li{
   margin-left:8vw;
   margin-right: 8vw;
   margin-top: 5vh;
+  display: flex;
+  justify-content: space-between;
 
 
 }
 .Button {
   
   color: #ff6600;
-  padding: 10px 25px;
+  padding: 10px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   border: solid black;
   border-radius: 7px;
+  
   
 }
 
@@ -191,7 +195,7 @@ a:hover,a:active {
 }
 .search{
   position: relative;
-  overflow: scroll;
+  overflow: hidden;
   display: block;
   float: centre;
   margin-left: 8vw;
@@ -220,7 +224,7 @@ a:hover,a:active {
 
 .comment{
   line-height: 2;
-  overflow:scroll;
+  overflow:hidden;
 }
 
 
@@ -228,7 +232,7 @@ a:hover,a:active {
  @media screen and (max-width: 500px) {
   ul{
     position:relative;
-    overflow: scroll;
+    overflow: hidden;
     display: block;
     margin-left: 8vw;
     margin-right: 8vw;

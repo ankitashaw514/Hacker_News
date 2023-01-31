@@ -14,7 +14,7 @@ const Header = () => {
           <li><a href="/"><h3>Hacker News</h3></a></li>
         </div>
         <div>
-          <li><a href="/newStories">New Stories</a></li>  
+          <li><a href="/newStories">NewStories</a></li>  
           <li><a href="https://news.ycombinator.com/front">Past</a></li> 
           <li><a href="https://news.ycombinator.com/newcomments">Comments</a></li> 
           <li><a href="https://news.ycombinator.com/ask">Ask</a></li> 
