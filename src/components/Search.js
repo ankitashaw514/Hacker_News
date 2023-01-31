@@ -73,7 +73,7 @@ const Search = () => {
                   }}}/>             
               </div>
               <div className="right">
-                <select value={search} onChange={e => setSearch(e.target.value)}>
+              <select value={search} onChange={e => setSearch(e.target.value)}>
                   {searchOptions.map((value) => (
                     <option value={value} key={value}>
                       {value}
@@ -124,15 +124,16 @@ const Search = () => {
                 <React.Fragment>
                   {results.map((result)=>{
                     return(
-                      <div>
+                      <div key = {Math.random()}>
                       {result?(<Story key = {result.objectID} story={result} />):
-                        (<p className="loading"></p>)
+                        (null)
 
                       }
-                      </div>)})}
+                      </div>
+                    )})}
                   <div className="buttonBox">
-                  <button className="Button" onClick={decrementPageNum}>&#8249; Privious</button>
-                  <button className="Button" onClick={increamentPageNum}>Next &#8250;</button>
+                    <button className="Button" onClick={decrementPageNum}>&#8249; Privious</button>
+                    <button className="Button" onClick={increamentPageNum}>Next &#8250;</button>
                   </div>
                 </React.Fragment>
         

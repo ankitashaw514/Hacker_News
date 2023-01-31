@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
+import {createRoot}from 'react-dom/client';
 import AppRouter from './router/AppRouter';
 
 
 import  './index.css'
 import  reportWebVitals from './reportWebVitals';
 
-
-ReactDOM.render(<AppRouter />, document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
+root.render(<AppRouter />, );
 
 
  reportWebVitals();

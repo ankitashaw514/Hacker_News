@@ -89,9 +89,6 @@ const getResultOfAllTagsForTimeRange = async (query,timeRange,pageNum,startDate,
   const timestampAYearAgo = timestampToday - 365 * 24 * 3600
   const timestampStartDate = Math.round(startDate.getTime()/1000)
   const timestampEndDate = Math.round(endDate.getTime()/1000)
-  console.log(timestampToday)
-  console.log(timestampStartDate)
-  console.log(timestampEndDate)
   let response;
 
   // getting the response based on the Time Range provided by the user
@@ -147,7 +144,7 @@ const getFilteredResults = async (query,search,by,timeRange,pageNum,startDate,en
   let results = [];
   try {
     if(search === "all"){
-      
+
       if(by === "Popularity"){
           const result = await getResultOfAllTagsForTimeRange(query,timeRange,pageNum,startDate,endDate,QUERY_BASED_SEARCH_URL_BY_POPULARITY)
           
