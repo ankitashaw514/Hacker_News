@@ -1,6 +1,7 @@
 // url for searching stories ordered by the newest to oldest
 
-export const TIME_BASED_STORY_SEARCH_URL = 'http://hn.algolia.com/api/v1/search_by_date?tags=story'
+export const TIME_BASED_STORY_SEARCH_URL = 'https://hn.algolia.com/api/v1/search_by_date?tags=story'
+
 
 // url for searching based on query given by the user and popularity
 
